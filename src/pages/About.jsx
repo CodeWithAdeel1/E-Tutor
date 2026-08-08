@@ -15,7 +15,7 @@ const About = () => {
         <section>
           <h2 className="text-2xl sm:text-3xl font-semibold text-[#FF7043] mb-2">Our Story</h2>
           <p className="text-base sm:text-lg leading-relaxed text-justify">
-            We are <strong>Muhammad Usama Saeed</strong> and <strong>Muhammad Adeel</strong>, final year BS students driven by our passion for learning and teaching. This project was born out of a simple but powerful idea: to eliminate the barriers students face when trying to find the right teachers.
+            We are {/* <strong>Muhammad Usama Saeed</strong> and */} <strong>Muhammad Adeel</strong>, final year BS students driven by our passion for learning and teaching. This project was born out of a simple but powerful idea: to eliminate the barriers students face when trying to find the right teachers.
           </p>
         </section>
 
@@ -27,29 +27,50 @@ const About = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-[#FF7043] mb-4">Meet the Developers</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-[#FF7043] mb-4">Meet the Developer</h2>
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
             <div className="bg-[#FFE0B2] p-6 sm:p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow">
               <h3 className="text-xl font-semibold text-[#FF7043] mb-2">Muhammad Adeel</h3>
               <p className="text-base sm:text-md text-gray-800 leading-relaxed">
-              Hi, I'm Muhammad Adeel, a passionate React developer with expertise in Node.js and Express. I focus on building dynamic, user-friendly interfaces and scalable back-end solutions. Currently completing my BS degree at Agriculture University Peshawar, I’m dedicated to creating impactful, full-stack applications that solve real-world problems.
+                Hi, I'm Muhammad Adeel, a passionate React developer with expertise in Node.js and Express. I focus on building dynamic, user-friendly interfaces and scalable back-end solutions. Currently completing my BS degree at Agriculture University Peshawar, I’m dedicated to creating impactful, full-stack applications that solve real-world problems.
               </p>
-              {/* CV View Button for Adeel */}
-              <a href='' target="_blank" rel="noopener noreferrer">
-                <button className="mt-4 px-6 py-2 bg-[#FF7043] text-white rounded-md hover:bg-[#FF5722] transition-all">View Adeel's CV</button>
-              </a>
+              
+              {/* CV Action Buttons */}
+              <div className="flex flex-wrap gap-4 mt-4">
+                {/* Opens CV in a new tab */}
+                <a 
+                  href="/M-Adeel_CV.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <button className="px-6 py-2 bg-[#FF7043] text-white rounded-md hover:bg-[#FF5722] transition-all font-medium">
+                    View CV
+                  </button>
+                </a>
+
+                {/* Direct Download CV Button */}
+                <a 
+                  href="/M-Adeel_CV.pdf" 
+                  download="Muhammad_Adeel_CV.pdf"
+                >
+                  <button className="px-6 py-2 border-2 border-[#FF7043] text-[#FF7043] rounded-md hover:bg-[#FF7043] hover:text-white transition-all font-medium">
+                    Download CV
+                  </button>
+                </a>
+              </div>
             </div>
 
+            {/* 
             <div className="bg-[#FFE0B2] p-6 sm:p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow">
               <h3 className="text-xl font-semibold text-[#FF7043] mb-2">Muhammad Usama Saeed</h3>
               <p className="text-base sm:text-md text-gray-800 leading-relaxed">
-              I'm Muhammad Usama Saeed, a backend developer skilled in creating scalable applications and APIs. Currently completing my BS degree at Agriculture University Peshawar, I gained practical experience as a backend developer at E Digital Pakistan Pvt Ltd. I specialize in performance, security, and efficient data handling.
+                I'm Muhammad Usama Saeed, a backend developer skilled in creating scalable applications and APIs. Currently completing my BS degree at Agriculture University Peshawar, I gained practical experience as a backend developer at E Digital Pakistan Pvt Ltd. I specialize in performance, security, and efficient data handling.
               </p>
-              {/* CV View Button for Usama */}
               <a href='{usamaCV}' target="_blank" rel="noopener noreferrer">
                 <button className="mt-4 px-6 py-2 bg-[#FF7043] text-white rounded-md hover:bg-[#FF5722] transition-all">View Usama's CV</button>
               </a>
-            </div>
+            </div> 
+            */}
           </div>
         </section>
 
@@ -61,7 +82,7 @@ const About = () => {
         </section>
 
         <footer className="pt-6 border-t text-center">
-          <p className="text-sm text-gray-500">Made by Muhammad Usama Saeed & Muhammad Adeel</p>
+          <p className="text-sm text-gray-500">Made by Muhammad Adeel {/* & Muhammad Usama Saeed */}</p>
         </footer>
       </div>
     </div>

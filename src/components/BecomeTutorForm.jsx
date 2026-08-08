@@ -34,11 +34,11 @@ const BecomeTutorForm = () => {
 
   useEffect(() => {
     if (user) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         fullName: user.fullName || '',
         dateOfBirth: user.dateOfBirth ? user.dateOfBirth.split('T')[0] : '', // format date
-        gender: user.gender.toLowerCase() || '',
+        gender: user.gender ? user.gender.toLowerCase() : '', // Fixed optional check
         phoneNumber: user.phoneNumber || '',
         city: user.address?.city || '',
         country: user.address?.country || '',
@@ -50,7 +50,9 @@ const BecomeTutorForm = () => {
         pastInstitutions: user.pastInstitutions?.join(', ') || '',
         certifications: user.certifications?.join(', ') || '',
         hourlyRate: user.hourlyRate || '',
-        availability: JSON.stringify(user.availability || { days: [], timeSlots: [] }),
+        availability: JSON.stringify(
+          user.availability || { days: [], timeSlots: [] }
+        ),
       }));
 
       if (user.role === 'Pending-Tutor') setStatus('pending');
@@ -60,14 +62,15 @@ const BecomeTutorForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     if (name === 'resumeUrl') setResumeFile(files[0]);
     else if (name === 'idProofUrl') setIdProofFile(files[0]);
-    else if (name === 'educationCertificates') setEducationFiles(Array.from(files));
+    else if (name === 'educationCertificates')
+      setEducationFiles(Array.from(files));
   };
 
   const handleSubmit = async (e) => {
@@ -87,7 +90,7 @@ const BecomeTutorForm = () => {
       // Append files
       if (resumeFile) data.append('resumeUrl', resumeFile);
       if (idProofFile) data.append('idProofUrl', idProofFile);
-      educationFiles.forEach(file => {
+      educationFiles.forEach((file) => {
         data.append('educationCertificates', file);
       });
 
@@ -97,7 +100,9 @@ const BecomeTutorForm = () => {
 
       if (response.user) updateUser(response.user);
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to submit tutor application');
+      setError(
+        err.response?.data?.error || 'Failed to submit tutor application'
+      );
     } finally {
       setLoading(false);
     }
@@ -105,18 +110,30 @@ const BecomeTutorForm = () => {
 
   if (status === 'approved') {
     return (
-      <Alert variant="success" className="mt-4 max-w-4xl mx-auto p-6 rounded-lg shadow-md">
+      <Alert
+        variant="success"
+        className="mt-4 max-w-4xl mx-auto p-6 rounded-lg shadow-md"
+      >
         <Alert.Heading>Your tutor request has been approved!</Alert.Heading>
-        <p>You are now a tutor on our platform. You can start offering your tutoring services.</p>
+        <p>
+          You are now a tutor on our platform. You can start offering your
+          tutoring services.
+        </p>
       </Alert>
     );
   }
 
   if (status === 'pending') {
     return (
-      <Alert variant="warning" className="mt-4 max-w-4xl mx-auto p-6 rounded-lg shadow-md">
+      <Alert
+        variant="warning"
+        className="mt-4 max-w-4xl mx-auto p-6 rounded-lg shadow-md"
+      >
         <Alert.Heading>Your tutor application is pending review</Alert.Heading>
-        <p>Your application has been submitted and is currently under review by our admin team.</p>
+        <p>
+          Your application has been submitted and is currently under review by
+          our admin team.
+        </p>
       </Alert>
     );
   }
@@ -127,7 +144,9 @@ const BecomeTutorForm = () => {
       className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-6"
       style={{ fontFamily: 'Arial, sans-serif' }}
     >
-      <h2 className="text-3xl font-semibold mb-6 text-gray-800">Become a Tutor</h2>
+      <h2 className="text-3xl font-semibold mb-6 text-gray-800">
+        Become a Tutor
+      </h2>
 
       {/* Personal Info */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -156,9 +175,9 @@ const BecomeTutorForm = () => {
           className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">Select Gender</option>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
         </select>
         <input
           type="tel"
@@ -257,7 +276,9 @@ const BecomeTutorForm = () => {
       {/* Uploads */}
       <div className="space-y-4">
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Resume (PDF)</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Resume (PDF)
+          </label>
           <input
             type="file"
             name="resumeUrl"
@@ -269,7 +290,9 @@ const BecomeTutorForm = () => {
         </div>
 
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">ID Proof (PDF, JPG, PNG)</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            ID Proof (PDF, JPG, PNG)
+          </label>
           <input
             type="file"
             name="idProofUrl"
@@ -280,7 +303,9 @@ const BecomeTutorForm = () => {
         </div>
 
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Education Certificates (multiple allowed)</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Education Certificates (multiple allowed)
+          </label>
           <input
             type="file"
             name="educationCertificates"
